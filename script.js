@@ -40,18 +40,15 @@ As SNT matures, more quality assurance is needed such that NMCPs can be confiden
 
             <h5>A. Data Assembly and Management/Shapefiles</h5>
             <h3 style="color: #47B5FF;">Shapefiles</h3>
-            <p><em>This section explains the workflow of importing and managing shapefiles using R.</em></p>
-            <p>Administrative Units represent different levels of geographic division within a country. 
-            <p>These units are typically organized hierarchically:</p>
+         
+            <p>Administrative Units represent different levels of geographic division within a country. These units are typically organized hierarchically:</p>
+        
             <p>(i).Admin 1: Refers to a primary division, such as states or provinces</p>
             <p>(ii).Admin 2: Refers to a subdivision of Admin 1, such as districts or counties.</p>
             <p>(iii).Admin 3: Refers to smaller divisions, such as municipalities or wards.</p>
             <p>  </p>
-            <p><em>Overlaying Shapefiles:</em></p>
-            <p>This allows you to visualize relationships between these different administrative layers,</p>
-            <p>such as overlaying administrative boundaries of districts (Admin 2) with those of provinces (Admin 1).</p>
-            <p>This is useful for visual analysis, spatial operations, and understanding how different areas relate geographically.</p>
-
+            <h5><em>Overlaying Shapefiles:</em></h5>
+            <p>This allows you to visualize relationships between these different administrative layers, such as overlaying administrative boundaries of districts (Admin 2) with those of provinces (Admin 1). This is useful for visual analysis, spatial operations, and understanding how different areas relate geographically.</p>
             <div class="round-buttons">
                 <button class="rect-button" onclick="window.location.href='https://example.com/button1';">View R EN</button>
                 <button class="rect-button" onclick="window.location.href='https://example.com/button2';">View R FR</button>
