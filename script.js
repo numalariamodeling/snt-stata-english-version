@@ -58,26 +58,29 @@ As SNT matures, more quality assurance is needed such that NMCPs can be confiden
             </div>
             
             <h4 id="stepByStep">Step-by-step guide</h4>
-            <h5 style="color: #ADD8E6;">Step 1: Install Necessary Libraries</h5>
+            <h5 style="color: #ADD8E6;">Step 1: Install Required Packages</h5>
             
-            <p>Before starting, ensure you have the required R packages installed.</p>
+            <p>To work with shapefiles in Stata, you need to use the spmap command. This requires a package called spmap. You also need to install shp2dta to convert shapefiles into Stata data files.</p>
             <p>This can be done using the following code:</p>
             <pre><code>
-# Install necessary libraries
+// Install required packages for working with shapefiles
+ssc install shp2dta
+ssc install spmap
 
-install.packages(c("sf", "ggplot2", "dplyr"))    
-            </code><button class="copy-button" onclick="copyCode()">Copy Code</button> <!-- Copy button positioned here --></pre>
-            <p>This code installs the <code>sf</code> package for handling spatial data, <code>ggplot2</code> for data visualization, and <code>dplyr</code> for data manipulation.</p>
           
-            <h5 style="color: #ADD8E6;">Step 2: Load Necessary Libraries</h5>
-            <p>After installing the libraries, you need to load them into your R environment:</p>
+            <h5 style="color: #ADD8E6;">Step 2: Load Shapefiles (Admin 1 and Admin 2)</h5>
+            <p>Convert the shapefiles (admin1.shp and admin2.shp) to .dta files using shp2dta.</p>
             <pre><button class="copy-button" onclick="copyCode()">Copy Code</button> <!-- Copy button positioned here --><code>            
-# Load necessary libraries
-library(sf)
-library(dplyr)
-library(ggplot2)
+// Convert Admin 1 shapefile to Stata data files
+shp2dta using "path/to/admin1.shp", database(admin1_data) coordinates(admin1_coords) genid(id1)
+
+// Convert Admin 2 shapefile to Stata data files
+shp2dta using "path/to/admin2.shp", database(admin2_data) coordinates(admin2_coords) genid(id2)
+
             </code></pre>
-            <p>This step makes the functions from these libraries available for use in your script.</p>   
+            <p>shp2dta using "path/to/admin1.shp": Converts the shapefile into .dta files.</p> 
+            <p>database(admin1_data) and coordinates(admin1_coords): Specify names for the output database and coordinates.</p>
+            <p>genid(id1): Generates a unique ID for each feature.</p>
             <h5 style="color: #ADD8E6;">Step 3: Import Shapefiles</h5>
             <p>You can import shapefiles using the <code>st_read</code> function from the <code>sf</code> package. Here’s a function to do that:</p>
             <pre><button class="copy-button" onclick="copyCode()">Copy Code</button> <!-- Copy button positioned here --><code>
