@@ -127,39 +127,33 @@ visualize_shapefile <- function(shapefile, variable) {
           
             <pre id="codeBlock">
                 <code>
-# Install necessary libraries
-install.packages(c("sf", "ggplot2", "dplyr"))
+// Install required packages for working with shapefiles
+ssc install shp2dta
+ssc install spmap
 
-# Load necessary libraries
-library(sf)
-library(dplyr)
-library(ggplot2)
+// Convert Admin 1 shapefile to Stata data files
+shp2dta using "path/to/admin1.shp", database(admin1_data) coordinates(admin1_coords) genid(id1)
 
-# Import Shapefiles
-import_shapefile <- function(filepath) {
-    shapefile <- st_read(filepath)  # Read the shapefile
-    return(shapefile)  # Return the loaded shapefile
-}
+// Convert Admin 2 shapefile to Stata data files
+shp2dta using "path/to/admin2.shp", database(admin2_data) coordinates(admin2_coords) genid(id2)
 
-# Rename and Match Names
-rename_shapefile_columns <- function(shapefile, new_names) {
-    colnames(shapefile) <- new_names  # Rename columns
-    return(shapefile)  # Return the renamed shapefile
-}
+// Merge coordinates with attributes for Admin 1
+use admin1_data, clear
+merge 1:1 id1 using admin1_coords
 
-# Link Shapefiles to Relevant Scales
-link_shapefiles_to_scales <- function(shapefile, scales_df, link_col) {
-    linked_shapefile <- merge(shapefile, scales_df, by = link_col)  # Merge shapefile with scales
-    return(linked_shapefile)  # Return the linked shapefile
-}
+// Merge coordinates with attributes for Admin 2
+use admin2_data, clear
+merge 1:1 id2 using admin2_coords
 
-# Visualizing Shapefiles and Making Basic Maps
-visualize_shapefile <- function(shapefile, variable) {
-    ggplot(data = shapefile) +
-        geom_sf(aes_string(fill = variable)) +
-        scale_fill_viridis_c() +
-        ggtitle(paste('Shapefile Visualization:', variable))
-}
+// Load Admin 1 and Admin 2 data files
+use admin1_data, clear
+
+// Plot Admin 2 (red) first, and then overlay Admin 1 (blue)
+spmap using admin2_coords, id(id2) color(red*0.4) || ///
+spmap using admin1_coords, id(id1) color(blue*1.2) ///
+title("Overlay of Admin 1 and Admin 2 Units") subtitle("Admin 1 (blue) and Admin 2 (red)") ///
+legend(off)
+
                 </code>
                 <button class="copy-button" onclick="copyCode()">Copy Code</button> <!-- Copy button positioned here -->
             </pre>
