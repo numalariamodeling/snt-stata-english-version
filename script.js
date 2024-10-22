@@ -66,8 +66,6 @@ As SNT matures, more quality assurance is needed such that NMCPs can be confiden
 // Install required packages for working with shapefiles
 ssc install shp2dta
 ssc install spmap
-
-
             </code></pre>          
             <h5 style="color: #ADD8E6;">Step 2: Load Shapefiles (Admin 1 and Admin 2)</h5>
             <p>Convert the shapefiles (admin1.shp and admin2.shp) to .dta files using shp2dta.</p>
@@ -79,30 +77,42 @@ shp2dta using "path/to/admin1.shp", database(admin1_data) coordinates(admin1_coo
 shp2dta using "path/to/admin2.shp", database(admin2_data) coordinates(admin2_coords) genid(id2)
 
             </code></pre>
-            <p>shp2dta using "path/to/admin1.shp": Converts the shapefile into .dta files.</p> 
-            <p>database(admin1_data) and coordinates(admin1_coords): Specify names for the output database and coordinates.</p>
-            <p>genid(id1): Generates a unique ID for each feature.</p>
+            <p> (i). shp2dta using "path/to/admin1.shp": Converts the shapefile into .dta files.</p> 
+            <p> (ii). database(admin1_data) and coordinates(admin1_coords): Specify names for the output database and coordinates.</p>
+            <p> (iii). genid(id1): Generates a unique ID for each feature.</p>
             
             <h5 style="color: #ADD8E6;">Step 3: Merge Coordinates with Attributes</h5>
             <p>To work with spatial data in Stata, you need to merge the coordinate data with the database that contains attributes.</p>
             <pre><button class="copy-button" onclick="copyCode()">Copy Code</button> <!-- Copy button positioned here --><code>
-# Import Shapefiles
-import_shapefile <- function(filepath) {
-    shapefile <- st_read(filepath)  # Read the shapefile
-    return(shapefile)  # Return the loaded shapefile
-}
+// Merge coordinates with attributes for Admin 1
+use admin1_data, clear
+merge 1:1 id1 using admin1_coords
+
+// Merge coordinates with attributes for Admin 2
+use admin2_data, clear
+merge 1:1 id2 using admin2_coords
             </code></pre>
-            <p>This function takes a file path as input, reads the shapefile, and returns it as a spatial object.</p>     
-            <h5 style="color: #ADD8E6;">Step 4: Rename and Match Names</h5>
-            <p>Sometimes, the columns in your shapefile may need to be renamed for clarity or to match other datasets. You can do this as follows:</p>
+                
+            <h5 style="color: #ADD8E6;">Step 4: Plot Admin 1 and Admin 2 Overlays</h5>
+            <p>Now that the shapefiles have been converted and merged, you can use spmap to plot them.</p>
             <pre><button class="copy-button" onclick="copyCode()">Copy Code</button> <!-- Copy button positioned here --><code>
-# Rename and Match Names
-rename_shapefile_columns <- function(shapefile, new_names) {
-    colnames(shapefile) <- new_names  # Rename columns
-    return(shapefile)  # Return the renamed shapefile
-}
+// Load Admin 1 and Admin 2 data files
+use admin1_data, clear
+
+// Plot Admin 2 (red) first, and then overlay Admin 1 (blue)
+spmap using admin2_coords, id(id2) color(red*0.4) || ///
+spmap using admin1_coords, id(id1) color(blue*1.2) ///
+title("Overlay of Admin 1 and Admin 2 Units") subtitle("Admin 1 (blue) and Admin 2 (red)") ///
+legend(off)
+
             </code></pre>
-            <p>This function takes a shapefile and a list of new names, renaming the columns accordingly.</p>
+            <p>(i). spmap using admin2_coords: Plots Admin 2 with the specified coordinate file.</p>
+            <p>(ii). id(id2): Uses the unique ID to connect the attributes with the coordinates.</p>
+            <p>(iii). spmap using admin2_coords: Plots Admin 2 with the specified coordinate file.</p>
+            <p>(iv). spmap using admin2_coords: Plots Admin 2 with the specified coordinate file.</p>
+            <p>(v). spmap using admin2_coords: Plots Admin 2 with the specified coordinate file.</p>
+            <p>(vi). spmap using admin2_coords: Plots Admin 2 with the specified coordinate file.</p>
+            <p>(vii). spmap using admin2_coords: Plots Admin 2 with the specified coordinate file.</p>
 
           
             <h5 style="color: #ADD8E6;">Step 5: Link Shapefiles to Relevant Scales</h5>
