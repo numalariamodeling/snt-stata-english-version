@@ -47,7 +47,7 @@ As SNT matures, more quality assurance is needed such that NMCPs can be confiden
             <p>(ii).Admin 2: Refers to a subdivision of Admin 1, such as districts or counties.</p>
             <p>(iii).Admin 3: Refers to smaller divisions, such as municipalities or wards.</p>
             <p>  </p>
-            <h5><em>Overlaying Shapefiles:</em></h5>
+            <h5><em>Overlaying Shapefiles:</em></h5>   
             <p>This allows you to visualize relationships between these different administrative layers, such as overlaying administrative boundaries of districts (Admin 2) with those of provinces (Admin 1). This is useful for visual analysis, spatial operations, and understanding how different areas relate geographically.</p>
             <div class="round-buttons">
                 <button class="rect-button" onclick="window.location.href='https://example.com/button1';">View R EN</button>
