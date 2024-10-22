@@ -108,35 +108,11 @@ legend(off)
             </code></pre>
             <p>(i). spmap using admin2_coords: Plots Admin 2 with the specified coordinate file.</p>
             <p>(ii). id(id2): Uses the unique ID to connect the attributes with the coordinates.</p>
-            <p>(iii). spmap using admin2_coords: Plots Admin 2 with the specified coordinate file.</p>
-            <p>(iv). spmap using admin2_coords: Plots Admin 2 with the specified coordinate file.</p>
-            <p>(v). spmap using admin2_coords: Plots Admin 2 with the specified coordinate file.</p>
-            <p>(vi). spmap using admin2_coords: Plots Admin 2 with the specified coordinate file.</p>
-            <p>(vii). spmap using admin2_coords: Plots Admin 2 with the specified coordinate file.</p>
-
-          
-            <h5 style="color: #ADD8E6;">Step 5: Link Shapefiles to Relevant Scales</h5>
-            <p>Link your shapefile to relevant scales or metadata by merging it with another data frame:</p>
-            <pre><button class="copy-button" onclick="copyCode()">Copy Code</button> <!-- Copy button positioned here --><code>
-# Link Shapefiles to Relevant Scales
-link_shapefiles_to_scales <- function(shapefile, scales_df, link_col) {
-    linked_shapefile <- merge(shapefile, scales_df, by = link_col)  # Merge shapefile with scales
-    return(linked_shapefile)  # Return the linked shapefile
-}
-            </code></pre>
-            <p>This function performs a merge between the shapefile and a data frame containing scale information based on a specified linking column.</p>
-            <h5 style="color: #ADD8E6;">Step 6: Visualizing Shapefiles and Making Basic Maps</h5>
-            <p>Finally, you can visualize the shapefile using <code>ggplot2</code> and <code>sf</code>. Here’s a function to do that:</p>
-            <pre><button class="copy-button" onclick="copyCode()">Copy Code</button> <!-- Copy button positioned here --><code>
-# Visualizing Shapefiles and Making Basic Maps
-visualize_shapefile <- function(shapefile, variable) {
-    ggplot(data = shapefile) +
-        geom_sf(aes_string(fill = variable)) +
-        scale_fill_viridis_c() +
-        ggtitle(paste('Shapefile Visualization:', variable))
-}
-            </code></pre>
-            <p>This function creates a simple map visualization using the spatial data. Replace <code>variable</code> with the name of the variable you want to visualize in the fill aesthetic.</p>
+            <p>(iii). color(red*0.4): Specifies a red color for Admin 2 with a line thickness of 0.4.</p>
+            <p>(iv). || is used to overlay a second map (Admin 1).</p>
+            <p>(v). The second spmap command overlays Admin 1 with a blue color (color(blue*1.2)).</p>
+            <p>(vi). title() and subtitle() add a title and subtitle to the plot.</p>
+            <p>(vii). legend(off): Removes the legend for a cleaner plot.</p>
 
             <h3 id="fullCode">Full code</h3>
           
