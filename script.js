@@ -62,12 +62,13 @@ As SNT matures, more quality assurance is needed such that NMCPs can be confiden
             
             <p>To work with shapefiles in Stata, you need to use the spmap command. This requires a package called spmap. You also need to install shp2dta to convert shapefiles into Stata data files.</p>
             <p>This can be done using the following code:</p>
-            <pre><code>
+            <pre><button class="copy-button" onclick="copyCode()">Copy Code</button> <!-- Copy button positioned here --><code>
 // Install required packages for working with shapefiles
 ssc install shp2dta
 ssc install spmap
 
-          
+
+            </code></pre>          
             <h5 style="color: #ADD8E6;">Step 2: Load Shapefiles (Admin 1 and Admin 2)</h5>
             <p>Convert the shapefiles (admin1.shp and admin2.shp) to .dta files using shp2dta.</p>
             <pre><button class="copy-button" onclick="copyCode()">Copy Code</button> <!-- Copy button positioned here --><code>            
@@ -81,8 +82,9 @@ shp2dta using "path/to/admin2.shp", database(admin2_data) coordinates(admin2_coo
             <p>shp2dta using "path/to/admin1.shp": Converts the shapefile into .dta files.</p> 
             <p>database(admin1_data) and coordinates(admin1_coords): Specify names for the output database and coordinates.</p>
             <p>genid(id1): Generates a unique ID for each feature.</p>
-            <h5 style="color: #ADD8E6;">Step 3: Import Shapefiles</h5>
-            <p>You can import shapefiles using the <code>st_read</code> function from the <code>sf</code> package. Here’s a function to do that:</p>
+            
+            <h5 style="color: #ADD8E6;">Step 3: Merge Coordinates with Attributes</h5>
+            <p>To work with spatial data in Stata, you need to merge the coordinate data with the database that contains attributes.</p>
             <pre><button class="copy-button" onclick="copyCode()">Copy Code</button> <!-- Copy button positioned here --><code>
 # Import Shapefiles
 import_shapefile <- function(filepath) {
