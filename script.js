@@ -50,100 +50,86 @@ As SNT matures, more quality assurance is needed such that NMCPs can be confiden
             <h5>Overlaying Shapefiles:</h5>   
             <p>This allows you to visualize relationships between these different administrative layers, such as overlaying administrative boundaries of districts (Admin 2) with those of provinces (Admin 1). This is useful for visual analysis, spatial operations, and understanding how different areas relate geographically.</p>
             <div class="round-buttons">
-                <button class="rect-button" onclick="window.location.href='https://example.com/button1';">View R EN</button>
-                <button class="rect-button" onclick="window.location.href='https://example.com/button2';">View R FR</button>
-                <button class="rect-button" onclick="window.location.href='https://example.com/button3';">View py EN</button>
-                <button class="rect-button" onclick="window.location.href='https://example.com/button2';">View py FR</button>
-                <button class="rect-button" onclick="window.location.href='https://example.com/button3';">View St FR</button>
+                <button class="rect-button" onclick="window.location.href='https://numalariamodeling.github.io/snt-code-library-english-version/#Overview';">View R EN</button>
+                <button class="rect-button" onclick="window.location.href='https://numalariamodeling.github.io/snt-code-library-french-version/#Overview';">View R FR</button>
+                <button class="rect-button" onclick="window.location.href='https://numalariamodeling.github.io/snt-python-english-version/#Overview';">View py EN</button>
+                <button class="rect-button" onclick="window.location.href='https://numalariamodeling.github.io/snt-python-french-version/#Overview';">View py FR</button>
+                <button class="rect-button" onclick="window.location.href='https://numalariamodeling.github.io/snt-stata-french-version/#Overview';">View St FR</button>
             </div>
             
             <h4 id="stepByStep">Step-by-step guide</h4>
-            <h5 style="color: #ADD8E6;">Step 1: Install Required Packages</h5>
+            <h5 style="color: #ADD8E6;">Step 1: </h5>
             
-            <p>To work with shapefiles in Stata, you need to use the spmap command. This requires a package called spmap. You also need to install shp2dta to convert shapefiles into Stata data files.</p>
+            <p></p>
             <p>This can be done using the following code:</p>
             <pre><button class="copy-button" onclick="copyCode()">Copy Code</button> <!-- Copy button positioned here --><code>
-// Install required packages for working with shapefiles
-ssc install shp2dta
-ssc install spmap
-            </code></pre>          
-            <h5 style="color: #ADD8E6;">Step 2: Load Shapefiles (Admin 1 and Admin 2)</h5>
-            <p>Convert the shapefiles (admin1.shp and admin2.shp) to .dta files using shp2dta.</p>
-            <pre><button class="copy-button" onclick="copyCode()">Copy Code</button> <!-- Copy button positioned here --><code>            
-// Convert Admin 1 shapefile to Stata data files
-shp2dta using "path/to/admin1.shp", database(admin1_data) coordinates(admin1_coords) genid(id1)
 
-// Convert Admin 2 shapefile to Stata data files
-shp2dta using "path/to/admin2.shp", database(admin2_data) coordinates(admin2_coords) genid(id2)
+
+
+
+            </code></pre>          
+            <h5 style="color: #ADD8E6;">Step 2: </h5>
+            <p> </p>
+            <pre><button class="copy-button" onclick="copyCode()">Copy Code</button> <!-- Copy button positioned here --><code>            
+
+
+
+
 
             </code></pre>
-            <p> (i). shp2dta using "path/to/admin1.shp": Converts the shapefile into .dta files.</p> 
-            <p> (ii). database(admin1_data) and coordinates(admin1_coords): Specify names for the output database and coordinates.</p>
-            <p> (iii). genid(id1): Generates a unique ID for each feature.</p>
+            <p> </p> 
+            <p> </p>
+            <p> </p>
             
-            <h5 style="color: #ADD8E6;">Step 3: Merge Coordinates with Attributes</h5>
-            <p>To work with spatial data in Stata, you need to merge the coordinate data with the database that contains attributes.</p>
+            <h5 style="color: #ADD8E6;">Step 3: </h5>
+            <p> </p>
             <pre><button class="copy-button" onclick="copyCode()">Copy Code</button> <!-- Copy button positioned here --><code>
-// Merge coordinates with attributes for Admin 1
-use admin1_data, clear
-merge 1:1 id1 using admin1_coords
 
-// Merge coordinates with attributes for Admin 2
-use admin2_data, clear
-merge 1:1 id2 using admin2_coords
+
+
+
+
             </code></pre>
                 
-            <h5 style="color: #ADD8E6;">Step 4: Plot Admin 1 and Admin 2 Overlays</h5>
-            <p>Now that the shapefiles have been converted and merged, you can use spmap to plot them.</p>
+            <h5 style="color: #ADD8E6;">Step 4: </h5>
+            <p> </p>
             <pre><button class="copy-button" onclick="copyCode()">Copy Code</button> <!-- Copy button positioned here --><code>
-// Load Admin 1 and Admin 2 data files
-use admin1_data, clear
 
-// Plot Admin 2 (red) first, and then overlay Admin 1 (blue)
-spmap using admin2_coords, id(id2) color(red*0.4) || ///
-spmap using admin1_coords, id(id1) color(blue*1.2) ///
-title("Overlay of Admin 1 and Admin 2 Units") subtitle("Admin 1 (blue) and Admin 2 (red)") ///
-legend(off)
+
+
+
+
+
 
             </code></pre>
-            <p>(i). spmap using admin2_coords: Plots Admin 2 with the specified coordinate file.</p>
-            <p>(ii). id(id2): Uses the unique ID to connect the attributes with the coordinates.</p>
-            <p>(iii). color(red*0.4): Specifies a red color for Admin 2 with a line thickness of 0.4.</p>
-            <p>(iv). || is used to overlay a second map (Admin 1).</p>
-            <p>(v). The second spmap command overlays Admin 1 with a blue color (color(blue*1.2)).</p>
-            <p>(vi). title() and subtitle() add a title and subtitle to the plot.</p>
-            <p>(vii). legend(off): Removes the legend for a cleaner plot.</p>
+            <p> </p>
+            <p> </p>
+            <p> </p>
+            <p>(iv) </p>
+            <p>(v) </p>
+            <p> </p>
+            <p> </p>
 
             <h3 id="fullCode">Full code</h3>
           
             <pre id="codeBlock">
                 <code>
-// Install required packages for working with shapefiles
-ssc install shp2dta
-ssc install spmap
 
-// Convert Admin 1 shapefile to Stata data files
-shp2dta using "path/to/admin1.shp", database(admin1_data) coordinates(admin1_coords) genid(id1)
 
-// Convert Admin 2 shapefile to Stata data files
-shp2dta using "path/to/admin2.shp", database(admin2_data) coordinates(admin2_coords) genid(id2)
 
-// Merge coordinates with attributes for Admin 1
-use admin1_data, clear
-merge 1:1 id1 using admin1_coords
 
-// Merge coordinates with attributes for Admin 2
-use admin2_data, clear
-merge 1:1 id2 using admin2_coords
 
-// Load Admin 1 and Admin 2 data files
-use admin1_data, clear
 
-// Plot Admin 2 (red) first, and then overlay Admin 1 (blue)
-spmap using admin2_coords, id(id2) color(red*0.4) || ///
-spmap using admin1_coords, id(id1) color(blue*1.2) ///
-title("Overlay of Admin 1 and Admin 2 Units") subtitle("Admin 1 (blue) and Admin 2 (red)") ///
-legend(off)
+
+
+
+
+
+
+
+
+
+
 
                 </code>
                 <button class="copy-button" onclick="copyCode()">Copy Code</button> <!-- Copy button positioned here -->
