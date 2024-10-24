@@ -61,7 +61,7 @@ As SNT matures, more quality assurance is needed such that NMCPs can be confiden
             <h5 style="color: #ADD8E6;">Step 1: </h5>
             
             <p></p>
-            <p>This can be done using the following code:</p>
+            <p> </p>
             <pre><button class="copy-button" onclick="copyCode()">Copy Code</button> <!-- Copy button positioned here --><code>
 
 
